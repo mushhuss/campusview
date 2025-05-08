@@ -1,0 +1,73 @@
+.container {
+    width: 900px;
+    margin: 30px auto;
+    text-align: center;
+  }
+  
+  .title {
+    font-weight: bold;
+    font-family: Courier, sans-serif;
+    font-size: 24px;
+    color: #11153e;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    background-color: #f0f0f5;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .cardContent {
+    padding: 0;
+  }
+  
+  .infoLabel {
+    font-weight: bold;
+    font-size: 18px;
+    color: #11153e;
+    margin-top: 10px;
+  }
+  
+  .addressText,
+  .descriptionText {
+    font-size: 16px;
+    margin-top: 5px;
+    color: #333;
+  }
+  
+  .studentName {
+    font-size: 16px;
+    color: #11153e;
+    margin-bottom: 10px;
+  }
+  
+  .studentLink {
+    text-decoration: none;
+  }
+  
+  .noStudentsText {
+    font-size: 16px;
+    margin-top: 20px;
+    color: #11153e;
+  }
+  
+  .button {
+    margin-top: 20px;
+    background-color: #11153e;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #333c7a;
+  }
+  
+  .editLink {
+    text-decoration: none;
+  }
+  

@@ -19,6 +19,13 @@ const allCampuses = (state = [], action) => {  // Empty array as default Initial
 
     case at.ADD_CAMPUS:
       return [...state, action.payload]
+
+      case at.EDIT_CAMPUS:
+        return state.map(campus => { 
+          return (
+            campus.id===action.payload.id ? action.payload : campus
+          );
+        });
       
     default:
       // If the Reducer doesn't recognize the Action Type, return the previous (current) State unchanged
