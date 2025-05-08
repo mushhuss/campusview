@@ -1,19 +1,20 @@
 /*==================================================
-NewCampusContainer.js
+EditCampusContainer.js
 
 The Container component is responsible for stateful logic and data fetching, and
 passes data (if any) as props to the corresponding View component.
 If needed, it also defines the component's "connect" function.
 ================================================== */
+
 import Header from './Header';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import NewCampusView from '../views/NewCampusView';
-import { addCampusThunk } from '../../store/thunks';
+import EditCampusView from '../views/EditCampusView';
+import { editCampusThunk, fetchCampusThunk } from '../../store/thunks';
 
-class NewCampusContainer extends Component {
+class EditCampusContainer extends Component {
   // Initialize state
   constructor(props){
     super(props);
@@ -27,6 +28,19 @@ class NewCampusContainer extends Component {
     };
   }
 
+  // Fetch existing campus info when component mounts
+  componentDidMount() {
+    const { campus } = this.props;
+    if (campus) {
+      this.setState({
+        name: campus.name,
+        address: campus.address,
+        description: campus.description,
+        imageURL: campus.imageURL,
+      });
+    }
+  }
+
   // Capture input data when it is entered
   handleChange = event => {
     this.setState({
@@ -36,47 +50,50 @@ class NewCampusContainer extends Component {
 
   // Take action after user clicks the submit button
   handleSubmit = async event => {
-    event.preventDefault();  // Prevent browser reload/refresh after submit.
+    event.preventDefault();
 
-    // Create new campus object
-    let campus = {
+    const campusId = this.props.match.params.id;
+
+    // Create updated campus object
+    let updatedCampus = {
+      id: campusId,
       name: this.state.name,
       address: this.state.address,
       description: this.state.description,
       imageURL: this.state.imageURL
     };
-    
-    // Add new campus to the backend database
-    let newCampus = await this.props.addCampus(campus);
 
-    // Update state and trigger redirect to show the new campus
+    // Dispatch edit action to backend
+    await this.props.editCampus(updatedCampus);
+
+    // Update state and trigger redirect
     this.setState({
-      name: "", 
-      address: "", 
-      description: "", 
-      imageURL: "",
-      redirect: true, 
-      redirectId: newCampus.id
+      redirect: true,
+      redirectId: campusId
     });
   }
 
-  // Unmount when the component is being removed from the DOM:
+  // Unmount when the component is being removed from the DOM
   componentWillUnmount() {
     this.setState({ redirect: false, redirectId: null });
   }
 
-  // Render new campus input form
+  // Render edit campus input form
   render() {
-    // Redirect to new campus's page after submit
+    // Redirect to the campus page after submit
     if(this.state.redirect) {
       return (<Redirect to={`/campus/${this.state.redirectId}`} />);
     }
 
-    // Display the input form via the corresponding View component
+    // Display the form with prefilled data via the View component
     return (
       <div>
         <Header />
-        <NewCampusView 
+        <EditCampusView 
+          name={this.state.name}
+          address={this.state.address}
+          description={this.state.description}
+          imageURL={this.state.imageURL}
           handleChange={this.handleChange} 
           handleSubmit={this.handleSubmit}
         />
@@ -85,12 +102,13 @@ class NewCampusContainer extends Component {
   }
 }
 
-// Map dispatch to props to allow adding a new campus
+// Map dispatch to props to allow editing and fetching a campus
 const mapDispatch = (dispatch) => {
   return {
-    addCampus: (campus) => dispatch(addCampusThunk(campus)),
+    fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
+    editCampus: (campus) => dispatch(editCampusThunk(campus))
   }
 }
 
 // Export store-connected container by default
-export default connect(null, mapDispatch)(NewCampusContainer);
+export default connect(null, mapDispatch)(EditCampusContainer);
