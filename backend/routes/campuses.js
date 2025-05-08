@@ -50,6 +50,7 @@ router.delete('/:id', ash(async(req, res) => {
 /* ADD NEW CAMPUS */
 router.post('/', ash(async(req, res) => {
   let newCampus = await Campus.create(req.body);
+  console.log('New campus created:', newCampus); // Check if it has an 'id'
   res.status(200).json(newCampus);  // Status code 200 OK - request succeeded
 }));
 
