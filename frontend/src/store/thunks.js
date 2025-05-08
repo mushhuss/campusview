@@ -20,12 +20,25 @@ export const fetchAllCampusesThunk = () => async (dispatch) => {  // The THUNK
   }
 };
 
+
+//DELETE CAMPUS THUNK NEEDS TO PING THE BACKEND TO REMOVE FROM DB
+export const deleteCampusThunk = campusId => async dispatch => {  // The THUNK
+  try {
+    // API "delete" call to delete student (based on "studentID") from database
+    await axios.delete(`/api/campuses/${campusId}`);  
+    // Delete successful so change state with dispatch
+    dispatch(ac.deleteCampus(campusId));
+  } catch(err) {
+    console.error(err);
+  }
+};
+
 // Single Campus
 // THUNK CREATOR:
 export const fetchCampusThunk = (id) => async (dispatch) => {  // The THUNK
   try {
     // API "get" call to get a student data (based on "id")from database
-    let res = await axios.get(`/api/campuses/${id}`);  
+    let res = await axios.get(`/api/campus/${id}`);  
     dispatch(ac.fetchCampus(res.data));
   } catch(err) {
     console.error(err);
