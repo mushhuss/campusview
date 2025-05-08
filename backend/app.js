@@ -52,7 +52,7 @@ const configureApp = async () => {
   app.use("/api", apiRouter);  // Updated (complete) URL paths for API: "/api/students/", "/api/students/:id", "/api/campuses/", and "/api/campuses/:id"
 
   // Handle routing error: Page Not Found
-  // It is triggered when a request is made to an undefined route 
+  // It is triggered when a request is made to an undefined route
   app.use((req, res, next) => {
     const error = new Error("Not Found, Please Check URL!");
     error.status = 404;  // Status code 404 Not Found - resource not found
