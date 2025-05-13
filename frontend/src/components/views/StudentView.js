@@ -5,39 +5,45 @@ The Views component is responsible for rendering web page with data provided by 
 It constructs a React component to display the single student view page.
 ================================================== */
 import { Link } from "react-router-dom";
+import './StudentView.css';
 
 const StudentView = ({ student }) => {
   if (!student) return <p>Student not found.</p>;
 
   return (
-    <div>
-      <h1>{student.firstname} {student.lastname}</h1>
+    <div className="student-container">
+      <div className="student-header">
+        <h1>{student.firstname} {student.lastname}</h1>
+      </div>
       <img
-        src={student.imageUrl || "https://via.placeholder.com/150"}
+        src={student.imageUrl}
         alt="Student"
         width="150"
       />
-      <p><strong>Email:</strong> {student.email}</p>
-      <p><strong>GPA:</strong> {student.gpa ?? "N/A"}</p>
-
-      {student.campus ? (
-        <p>
-          <strong>Enrolled Campus:</strong>{" "}
-          <Link to={`/campus/${student.campus.id}`}>
-            {student.campus.name}
-          </Link>
-        </p>
-      ) : (
-        <p>No Campus</p>
-      )}
-
-      <Link to={`/editstudent/${student.id}`}>
-        <button>Edit Student</button>
-      </Link>
-      <Link to={`/students`}>
-        <button>Back to All Students</button>
-      </Link>
+      <div className="student-info">
+        <p><strong>Email:</strong> {student.email}</p>
+        <p><strong>GPA:</strong> {student.gpa ?? "N/A"}</p>
+        {student.campus ? (
+          <p>
+            <strong>Enrolled Campus:</strong>{" "}
+            <Link to={`/campus/${student.campus.id}`}>
+              {student.campus.name}
+            </Link>
+          </p>
+        ) : (
+          <p>No Campus</p>
+        )}
+      </div>
+      <div className="student-buttons">
+        <Link to={`/editstudent/${student.id}`}>
+          <button>Edit Student</button>
+        </Link>
+        <Link to={`/students`}>
+          <button>Back to All Students</button>
+        </Link>
+      </div>
     </div>
+
   );
 };
 

@@ -5,16 +5,17 @@ The Views component is responsible for rendering web page with data provided by 
 It constructs a React component to display the all students view page.
 ================================================== */
 import { Link } from "react-router-dom";
+import './AllStudentsView.css'
 
 const AllStudentsView = (props) => {
   const {students, deleteStudent} = props;
   // If there is no student, display a message
   if (!students.length) {
     return (
-    <div>
+    <div className="no-student">
       <p>There are no students.</p>
       <Link to={`newstudent`}>
-        <button>Add New Student</button>
+        <button className="add-button">Add New Student</button>
       </Link>
     </div>
     );
@@ -22,17 +23,17 @@ const AllStudentsView = (props) => {
   
   // If there is at least one student, render All Students view 
   return (
-    <div>
-      <h1>All Students</h1>
+    <div className="container">
+      <h1 className="title">All Students</h1>
 
       {students.map((student) => {
           let name = student.firstname + " " + student.lastname;
           return (
-            <div key={student.id}>
-              <Link to={`/student/${student.id}`}>
+            <div key={student.id} className="card">
+              <Link to={`/student/${student.id}`} className="student-name">
                 <h2>{name}</h2>
               </Link>
-              <button onClick={() => deleteStudent(student.id)}>Delete</button>
+              <button className="button" onClick={() => deleteStudent(student.id)}>Delete</button>
               <hr/>
             </div>
           );
@@ -40,7 +41,7 @@ const AllStudentsView = (props) => {
       )}
       <br/>
       <Link to={`/newstudent`}>
-        <button>Add New Student</button>
+        <button className="add-button">Add New Student</button>
       </Link>
       <br/><br/>
     </div>

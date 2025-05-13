@@ -1,0 +1,73 @@
+.container {
+    width: 900px;
+    margin: 30px auto;
+    text-align: center;
+}
+  
+.card {
+    background-color: #f0f0f5;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 0;
+    text-align: left;
+    overflow: hidden;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+}
+
+.card:hover {
+    background-color: #e1e1e1;
+}
+
+.title {
+    font-weight: bold;
+    font-family: Courier, sans-serif;
+    font-size: 24px;
+    color: #11153e;
+    margin-bottom: 20px;
+}
+
+.student-name {
+    color: #11153e;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 15px;
+    text-decoration: none;
+}
+
+.button {
+    margin: 10px;
+    background-color: #11153e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #333c7a;
+}
+
+.add-button {
+    margin-bottom: 30px;
+    background-color: #11153e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background-color: #333c7a;
+}
+
+.no-student {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    font-size: 1.5rem;
+}
