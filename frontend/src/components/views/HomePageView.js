@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import hunterImg from '../../img/hunter.jpg';
 
 // Styling
 const useStyles = makeStyles(() => ({
@@ -41,7 +42,8 @@ const HomePageView = () => {
       <Typography className={classes.title}>
         Campus Management System
       </Typography>
-
+      <img src={hunterImg} alt="Campus" className={classes.image} />
+      <br/>
       <div className={classes.buttonContainer}>
         <Link to="/campuses" className={classes.links}>
           <Button 

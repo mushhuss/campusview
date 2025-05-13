@@ -109,37 +109,37 @@ const NewStudentView = (props) => {
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>First Name: </label>
             <input type="text" name="firstname" onChange={(e) => handleChange(e)} />
             {errors.firstname && <div className={classes.errorText}>{errors.firstname}</div>}
-            <br /><br />
+            <br/><br/>
 
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Last Name: </label>
             <input type="text" name="lastname" onChange={(e) => handleChange(e)} />
             {errors.lastname && <div className={classes.errorText}>{errors.lastname}</div>}
-            <br /><br />
+            <br/><br/>
 
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus Id: </label>
             <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
             {errors.campusId && <div className={classes.errorText}>{errors.campusId}</div>}
-            <br /><br />
+            <br/><br/>
 
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Email: </label>
             <input type="text" name="email" onChange={(e) => handleChange(e)} />
             {errors.email && <div className={classes.errorText}>{errors.email}</div>}
-            <br /><br />
+            <br/><br/>
 
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Image URL: </label>
             <input type="text" name="imageUrl" onChange={(e) => handleChange(e)} />
             {errors.imageUrl && <div className={classes.errorText}>{errors.imageUrl}</div>}
-            <br /><br />
+            <br/><br/>
 
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
             <input type="number" name="gpa" step="0.01" min="0" max="4" onChange={(e) => handleChange(e)} />
             {errors.gpa && <div className={classes.errorText}>{errors.gpa}</div>}
-            <br /><br />
+            <br/><br/>
 
             <Button variant="contained" color="primary" type="submit">
               Submit
             </Button>
-            <br /><br />
+            <br/><br/>
           </form>
         </div>
       </div>
