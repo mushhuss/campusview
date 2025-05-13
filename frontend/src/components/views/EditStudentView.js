@@ -47,19 +47,19 @@ const EditStudentView = (props) => {
     const newErrors = {};
     let isValid = true;
 
-    if (!firstname.trim()) {
+    if (!firstname || firstname.trim().length === 0) {
       newErrors.firstname = 'This field cannot be empty.';
       isValid = false;
     }
-    if (!lastname.trim()) {
+    if (!lastname || lastname.trim().length === 0) {
       newErrors.lastname = 'This field cannot be empty.';
       isValid = false;
     }
-    if (!email.trim()) {
+    if (!email || email.trim().length === 0) {
       newErrors.email = 'This field cannot be empty.';
       isValid = false;
     }
-    if (!imageURL.trim()) {
+    if (!imageURL || imageURL.trim().length === 0) {
       newErrors.imageURL = 'This field cannot be empty.';
       isValid = false;
     }
@@ -94,32 +94,32 @@ const EditStudentView = (props) => {
           <label style={{ color: '#11153e', fontWeight: 'bold' }}>First Name: </label>
           <input type="text" name="firstname" value={firstname} onChange={handleChange} />
           {errors.firstname && <div className={classes.errorText}>{errors.firstname}</div>}
-          <br /><br />
+          <br/><br/>
 
           <label style={{ color: '#11153e', fontWeight: 'bold' }}>Last Name: </label>
           <input type="text" name="lastname" value={lastname} onChange={handleChange} />
           {errors.lastname && <div className={classes.errorText}>{errors.lastname}</div>}
-          <br /><br />
+          <br/><br/>
 
           <label style={{ color: '#11153e', fontWeight: 'bold' }}>Email: </label>
           <input type="email" name="email" value={email} onChange={handleChange} />
           {errors.email && <div className={classes.errorText}>{errors.email}</div>}
-          <br /><br />
+          <br/><br/>
 
           <label style={{ color: '#11153e', fontWeight: 'bold' }}>Image URL: </label>
           <input type="text" name="imageURL" value={imageURL} onChange={handleChange} />
           {errors.imageURL && <div className={classes.errorText}>{errors.imageURL}</div>}
-          <br /><br />
+          <br/><br/>
 
           <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
           <input type="number" name="gpa" step="0.01" min="0" max="4" value={gpa} onChange={handleChange} />
           {errors.gpa && <div className={classes.errorText}>{errors.gpa}</div>}
-          <br /><br />
+          <br/><br/>
 
           <Button variant="contained" color="primary" type="submit">
             Save Changes
           </Button>
-          <br /><br />
+          <br/><br/>
         </form>
       </div>
     </div>
