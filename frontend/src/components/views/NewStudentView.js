@@ -58,6 +58,7 @@ const NewStudentView = (props) => {
     let isValid = true;
 
     for (const field in formData) {
+      if (field === 'campusId') continue;
       if (!formData[field].trim()) {
         newErrors[field] = 'This field cannot be empty.';
         isValid = false;

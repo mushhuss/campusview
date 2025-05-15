@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const EditStudentView = (props) => {
-  const { handleChange, handleSubmit, firstname, lastname, email, imageURL, gpa } = props;
+  const { handleChange, handleSubmit, firstname, lastname, campusId, email, imageURL, gpa } = props;
   const classes = useStyles();
 
   const [errors, setErrors] = useState({
@@ -43,29 +43,24 @@ const EditStudentView = (props) => {
     gpa: ''
   });
 
-  const validate = () => {
+  const validate = (formData) => {
     const newErrors = {};
     let isValid = true;
 
-    if (!firstname || firstname.trim().length === 0) {
-      newErrors.firstname = 'This field cannot be empty.';
-      isValid = false;
+    for (const field in formData) {
+      if (field === 'campusId') continue;
+      if (!formData[field] || formData[field].toString().trim().length === 0) {
+        newErrors[field] = 'This field cannot be empty.';
+        isValid = false;
+      }
     }
-    if (!lastname || lastname.trim().length === 0) {
-      newErrors.lastname = 'This field cannot be empty.';
-      isValid = false;
-    }
-    if (!email || email.trim().length === 0) {
-      newErrors.email = 'This field cannot be empty.';
-      isValid = false;
-    }
-    if (!imageURL || imageURL.trim().length === 0) {
-      newErrors.imageURL = 'This field cannot be empty.';
-      isValid = false;
-    }
-    if (gpa === '' || isNaN(parseFloat(gpa)) || parseFloat(gpa) < 0 || parseFloat(gpa) > 4) {
-      newErrors.gpa = 'GPA must be between 0 and 4.';
-      isValid = false;
+
+    if (formData.gpa !== '') {
+      const gpaValue = parseFloat(formData.gpa);
+      if (isNaN(gpaValue) || gpaValue < 0 || gpaValue > 4) {
+        newErrors.gpa = 'GPA must be between 0 and 4.';
+        isValid = false;
+      }
     }
 
     setErrors(newErrors);
@@ -74,7 +69,18 @@ const EditStudentView = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
+
+    const formData = {};
+    const formElements = e.target.elements;
+
+    formData.firstname = formElements.firstname.value;
+    formData.lastname = formElements.lastname.value;
+    formData.campusId = formElements.campusId.value;
+    formData.email = formElements.email.value;
+    formData.imageUrl = formElements.imageUrl.value;
+    formData.gpa = formElements.gpa.value;
+
+    if (validate(formData)) {
       handleSubmit(e);
     }
   };
@@ -92,27 +98,31 @@ const EditStudentView = (props) => {
 
         <form style={{ textAlign: 'center' }} onSubmit={onSubmit}>
           <label style={{ color: '#11153e', fontWeight: 'bold' }}>First Name: </label>
-          <input type="text" name="firstname" value={firstname} onChange={handleChange} />
+          <input type="text" name="firstname" defaultValue={firstname} onChange={handleChange} />
           {errors.firstname && <div className={classes.errorText}>{errors.firstname}</div>}
           <br/><br/>
 
           <label style={{ color: '#11153e', fontWeight: 'bold' }}>Last Name: </label>
-          <input type="text" name="lastname" value={lastname} onChange={handleChange} />
+          <input type="text" name="lastname" defaultValue={lastname} onChange={handleChange} />
           {errors.lastname && <div className={classes.errorText}>{errors.lastname}</div>}
           <br/><br/>
 
+          <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus ID: </label>
+          <input type="text" name="campusId" defaultValue={campusId} onChange={handleChange} />
+          <br/><br/>
+
           <label style={{ color: '#11153e', fontWeight: 'bold' }}>Email: </label>
-          <input type="email" name="email" value={email} onChange={handleChange} />
+          <input type="email" name="email" defaultValue={email} onChange={handleChange} />
           {errors.email && <div className={classes.errorText}>{errors.email}</div>}
           <br/><br/>
 
           <label style={{ color: '#11153e', fontWeight: 'bold' }}>Image URL: </label>
-          <input type="text" name="imageURL" value={imageURL} onChange={handleChange} />
-          {errors.imageURL && <div className={classes.errorText}>{errors.imageURL}</div>}
+          <input type="text" name="imageUrl" defaultValue={imageURL} onChange={handleChange} />
+          {errors.imageUrl && <div className={classes.errorText}>{errors.imageUrl}</div>}
           <br/><br/>
 
           <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
-          <input type="number" name="gpa" step="0.01" min="0" max="4" value={gpa} onChange={handleChange} />
+          <input type="number" name="gpa" step="0.01" min="0" max="4" defaultValue={gpa} onChange={handleChange} />
           {errors.gpa && <div className={classes.errorText}>{errors.gpa}</div>}
           <br/><br/>
 

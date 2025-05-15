@@ -38,7 +38,7 @@ class EditStudentContainer extends Component {
         lastname: student.lastname,
         campusId: student.campusId,
         email: student.email,
-        imageURL: student.imageUrl, // using 'imageURL' in state, 'imageUrl' in backend (like your EditCampus)
+        imageURL: student.imageUrl,
         gpa: student.gpa,
       });
     }
@@ -61,7 +61,7 @@ class EditStudentContainer extends Component {
       lastname: this.state.lastname,
       campusId: this.state.campusId,
       email: this.state.email,
-      imageUrl: this.state.imageURL, // Send to backend as 'imageUrl'
+      imageUrl: this.state.imageURL,
       gpa: this.state.gpa,
     };
 
@@ -100,10 +100,9 @@ class EditStudentContainer extends Component {
   }
 }
 
-// Map state to props so the component can access the student from Redux
 const mapState = (state, ownProps) => {
   return {
-    student: state.student, // Assumes the student is fetched into 'student' slice in Redux
+    student: state.student,
   };
 };
 

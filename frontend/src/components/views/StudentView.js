@@ -31,7 +31,7 @@ const StudentView = ({ student }) => {
             </Link>
           </p>
         ) : (
-          <p>No Campus</p>
+          <p><strong>Not Enrolled In Any Campus</strong></p>
         )}
       </div>
       <div className="student-buttons">
